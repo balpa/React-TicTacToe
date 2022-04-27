@@ -3,6 +3,8 @@ import '../App.css'
 
 function TicTactoe() {
 
+
+
     const [board, setBoard] = useState(Array(9).fill(null))
     const [currentPlayer, setCurrentPlayer] = useState('X')
     const [lastPlayer, setLastPlayer] = useState(null)
@@ -11,7 +13,7 @@ function TicTactoe() {
 
     console.log(board)
 
-    function Square ({ squareId }) { 
+    const Square: React.FC<{squareId: number}> = ({ squareId }) => { 
 
       return (
         <button className="square" 
