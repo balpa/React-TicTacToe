@@ -39,6 +39,38 @@ height: 50px;
 font-size: 40px;
 }
 
+.winner-modal{
+  width: 80vw;
+  height: 85vh;
+  background-color: rgb(128, 83, 0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+  border-radius: 25px;
+
+}
+
+#restart-button{
+  width: 50%;
+  height: 100px;
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px black;
+}
+
 
 
 

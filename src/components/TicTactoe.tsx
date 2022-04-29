@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css'
+import WinnerModal from './WinnerModal'
 
 function TicTactoe() {
 
@@ -11,6 +12,11 @@ function TicTactoe() {
     const [winner, setWinner] = useState(null)
 
 
+    function restart () {
+        setWinner(null)
+    }
+
+    console.log(winner)
 
     const Square: React.FC<{squareId: number}> = ({ squareId }) => { 
 
@@ -69,9 +75,23 @@ function TicTactoe() {
 
         if (checkWin(currentPlayer) === true){
             setWinner(currentPlayer)
-
-
         }
+        
+        // CHECK IF ALL SQUARES ARE FILLED
+        const isFull = () => {
+            let count = 0
+                for (let i = 1; i<board.length; i++) 
+                {
+                    if (board[i] === null) 
+                    {count += 1}
+                }
+                return count
+                }
+        // IF ALL SQUARES ARE FILLED, SETS A DRAW (IF ANYONE WINS, IT SHOULD'NT BE FULL SO IT SELF-CHECKS THE CONDITION)
+        if (isFull() === 0) {
+            setWinner('DRAW')
+            }
+        
 
     },[lastPlayer])
 
@@ -79,7 +99,7 @@ function TicTactoe() {
   return (
     <>
     <div className='current-player'>Current player is: {currentPlayer}</div>
-    <div className='winner'>{winner != null ? `Winner is: ${winner}` : ""}</div>
+
     <div className='frame'>
         <Square squareId={0}/>
         <Square squareId={1}/>
@@ -91,6 +111,11 @@ function TicTactoe() {
         <Square squareId={7}/>
         <Square squareId={8}/>
     </div>    
+    {winner != null ? <WinnerModal restart={ winner =>{
+            setWinner(winner);
+            setBoard(Array(9).fill(null))
+        }} 
+        winner={winner}/> : null}
     </>
   )
 }
