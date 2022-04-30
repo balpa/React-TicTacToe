@@ -4,8 +4,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50vw;
-  height: 80vh;
+  width: 30vw;
+  height: 60vh;
   border: 1px solid black;
   border-radius: 5px;
   background-color: white;
@@ -42,7 +42,7 @@ font-size: 40px;
 .winner-modal{
   width: 80vw;
   height: 85vh;
-  background-color: rgb(128, 83, 0);
+  background-color: rgb(128, 83, 0, 0.5);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -69,6 +69,17 @@ font-size: 40px;
   cursor: pointer;
   margin-top: 20px;
   box-shadow: 0px 0px 10px black;
+}
+.counts{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
 }
 
 

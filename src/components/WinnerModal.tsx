@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WinnerModal: React.FC<{winner: string, restart: any}> = ({winner, restart}) => {
+const WinnerModal: React.FC<{ winner: string, restart: any }> = ({winner, restart}) => {
   return (
       <>
       <div className='winner-modal'>

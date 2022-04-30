@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useRef } from 'react'
 import '../App.css'
 import WinnerModal from './WinnerModal'
 
@@ -10,6 +11,11 @@ function TicTactoe() {
     const [currentPlayer, setCurrentPlayer] = useState('X')
     const [lastPlayer, setLastPlayer] = useState(null)
     const [winner, setWinner] = useState(null)
+    const [gameCount, setGameCount] = useState(0)
+    const [countX, setCountX] = useState(0)
+    const [countO, setCountO] = useState(0)
+
+    let drawCount = gameCount - (countX+countO)
 
 
     function restart () {
@@ -71,10 +77,19 @@ function TicTactoe() {
                 if (board[combination[0]] === currentPlayer && board[combination[1]] === currentPlayer && board[combination[2]] === currentPlayer) {
                     return combination
                 }}}
-
+        console.log(whichCombination())
 
         if (checkWin(currentPlayer) === true){
             setWinner(currentPlayer)
+            setGameCount(gameCount + 1)
+            if (currentPlayer === "X")
+            {
+                setCountX(countX + 1)
+            }
+            else if (currentPlayer === "O")
+            {
+                setCountO(countO + 1)
+            }
         }
         
         // CHECK IF ALL SQUARES ARE FILLED
@@ -87,11 +102,12 @@ function TicTactoe() {
                 }
                 return count
                 }
-        // IF ALL SQUARES ARE FILLED, SETS A DRAW (IF ANYONE WINS, IT SHOULD'NT BE FULL SO IT SELF-CHECKS THE CONDITION)
-        if (isFull() === 0) {
+        // IF ALL SQUARES ARE FILLED, SETS A DRAW 
+        if (isFull() === 0 && checkWin(currentPlayer) === false) {
             setWinner('DRAW')
+            setGameCount(gameCount + 1)
             }
-        
+
 
     },[lastPlayer])
 
@@ -100,6 +116,13 @@ function TicTactoe() {
     <>
     <div className='current-player'>Current player is: {currentPlayer}</div>
 
+    <div className='counts'>
+        <div>Game {gameCount}</div>
+        <div>Draw {drawCount}</div>
+        <div>Games won by X: {countX}</div>
+        <div>Games won by O: {countO}</div>
+        
+    </div>
     <div className='frame'>
         <Square squareId={0}/>
         <Square squareId={1}/>
