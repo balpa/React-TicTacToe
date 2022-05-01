@@ -1,3 +1,4 @@
+import { spawn } from 'child_process'
 import React, {useState, useEffect} from 'react'
 import { useRef } from 'react'
 import '../App.css'
@@ -14,6 +15,7 @@ function TicTactoe() {
     const [gameCount, setGameCount] = useState(0)
     const [countX, setCountX] = useState(0)
     const [countO, setCountO] = useState(0)
+    const [selectedPlayer, setSelectedPlayer] = useState("2P")
 
     let drawCount = gameCount - (countX+countO)
 
@@ -27,7 +29,7 @@ function TicTactoe() {
     const Square: React.FC<{squareId: number}> = ({ squareId }) => { 
 
       return (
-        <button className="square" 
+        <button className={`square${squareId}`}
         onClick={()=> {
             const nextBoard = [...board]
             if (nextBoard[squareId] == null)
@@ -111,10 +113,17 @@ function TicTactoe() {
 
     },[lastPlayer])
 
+    console.log(selectedPlayer)
 
   return (
     <>
-    <div className='current-player'>Current player is: {currentPlayer}</div>
+    <div className='current-player'>Current player is: {currentPlayer}
+        <div>
+            <span style={selectedPlayer === '1P' ? {color: "red"} : {}} onClick={()=> setSelectedPlayer('1P')}>1P </span>
+            <span style={selectedPlayer === '2P' ? {color: "red"} : {}} onClick={()=> setSelectedPlayer('2P')}>2P</span>
+        </div>
+    </div>
+  
 
     <div className='counts'>
         <div>Game {gameCount}</div>
