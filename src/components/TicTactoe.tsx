@@ -16,15 +16,45 @@ function TicTactoe() {
     const [countX, setCountX] = useState(0)
     const [countO, setCountO] = useState(0)
     const [selectedPlayer, setSelectedPlayer] = useState("2P")
+    const [OsinArray, setOsinArray] = useState(0)
 
     let drawCount = gameCount - (countX+countO)
+
+    const placeMark = () => {
+        let randomElement = board[Math.floor(Math.random() * board.length)];
+
+            if (board[randomElement] === null)
+            {
+                board[randomElement] = 'O'   
+            }
+        
+    }
+
+    // counts O's in board.
+    useEffect(() => {
+        let count = 0
+        board.map((item) => {if (item === "O") {count++}})
+
+        placeMark()
+        setOsinArray(count)
+
+    },[board])
+
+
+
+    console.log(board)
+
+
+    function computePosition() {
+        let position = Math.floor(Math.random() * 8) + 1
+        return position
+    }
+
 
 
     function restart () {
         setWinner(null)
     }
-
-    console.log(winner)
 
     const Square: React.FC<{squareId: number}> = ({ squareId }) => { 
 
@@ -71,7 +101,6 @@ function TicTactoe() {
             })
         }
 
-
         // CHECK FOR THE WINNING COMBINATION POSITIONS, RETURNS AN ARRAY
         const whichCombination = () => {
             for (let i = 0; i < winningCombinations.length; i++) {
@@ -79,7 +108,7 @@ function TicTactoe() {
                 if (board[combination[0]] === currentPlayer && board[combination[1]] === currentPlayer && board[combination[2]] === currentPlayer) {
                     return combination
                 }}}
-        console.log(whichCombination())
+
 
         if (checkWin(currentPlayer) === true){
             setWinner(currentPlayer)
@@ -110,16 +139,15 @@ function TicTactoe() {
             setGameCount(gameCount + 1)
             }
 
-
     },[lastPlayer])
 
-    console.log(selectedPlayer)
 
   return (
     <>
     <div className='current-player'>Current player is: {currentPlayer}
         <div>
-            <span style={selectedPlayer === '1P' ? {color: "red"} : {}} onClick={()=> setSelectedPlayer('1P')}>1P </span>
+            Mode:
+            <span style={selectedPlayer === '1P' ? {color: "red"} : {}} onClick={()=> setSelectedPlayer('1P')}> 1P </span>
             <span style={selectedPlayer === '2P' ? {color: "red"} : {}} onClick={()=> setSelectedPlayer('2P')}>2P</span>
         </div>
     </div>
